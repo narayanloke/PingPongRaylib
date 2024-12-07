@@ -2,5 +2,5 @@
 
 void drawPlayerAtPos(int x,int y,int playerWidth,int playerHeight,Color color)
 {
-    DrawRectangle(x,y,10,30,color);
+    DrawRectangle(x,y,playerWidth,playerHeight,color);
 }

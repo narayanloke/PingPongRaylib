@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1733590686 source:/home/lokesaheb/cprojs/PingPong/main.c
+1733593250 source:/home/lokesaheb/cprojs/PingPong/main.c
 	<raylib.h>
 	"ball.h"
 	"player.h"
@@ -8,13 +8,13 @@
 	<stdarg.h>
 	<stdbool.h>
 
-1733589958 /home/lokesaheb/cprojs/PingPong/ball.h
+1733592939 /home/lokesaheb/cprojs/PingPong/ball.h
 	<raylib.h>
 
 1733591331 /home/lokesaheb/cprojs/PingPong/player.h
 	<raylib.h>
 
-1733589678 source:/home/lokesaheb/cprojs/PingPong/ball.c
+1733592955 source:/home/lokesaheb/cprojs/PingPong/ball.c
 	"ball.h"
 
 1733591317 source:/home/lokesaheb/cprojs/PingPong/player.c

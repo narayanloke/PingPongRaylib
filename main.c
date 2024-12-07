@@ -11,10 +11,13 @@ int player2Y=0;
 
 int ballX=0;
 int ballY=0;
+int ballRadius=30;
+Color ballColor=GREEN;
 
 
-int playerHeight=30;
-int playerWidth=10;
+int playerHeight=200;
+int playerWidth=20;
+Color playerColor=RED;
 
 int main(void)
 {
@@ -27,7 +30,12 @@ int main(void)
     player2Y=(screenHeight/2)-playerHeight;
     player1Y=(screenHeight/2)-playerHeight;
 
-    InitWindow(screenWidth, screenHeight, "Raylib [C] Example");
+
+    ballX=(screenWidth/2)-ballRadius;
+    ballY=(screenHeight/2)-ballRadius;
+
+
+    InitWindow(screenWidth, screenHeight, "PingPong");
 
     SetTargetFPS(60);
 
@@ -41,7 +49,7 @@ int main(void)
             }
         }
 
-        if(IsKeyDown(83))
+        if(IsKeyDown(83)) //Key Code 83 is the letter S on keyboard
         {
             if(player2Y<(screenHeight-playerHeight))
             {
@@ -49,11 +57,32 @@ int main(void)
             }
         }
 
+
+        if(IsKeyDown(KEY_UP)) //Key Code for Up Arrow key on keyboard
+        {
+            if(player1Y>0)
+            {
+                player1Y=player1Y-1;
+            }
+        }
+
+        if(IsKeyDown(KEY_DOWN))  //Key Code for Down Arrow key on keyboard
+        {
+            if(player1Y<(screenHeight-playerHeight))
+            {
+                player1Y=player1Y+1;
+            }
+        }
+
+
+
+
         BeginDrawing();
         ClearBackground(BLACK);
-        drawPlayerAtPos(player1X,player1Y,playerWidth,playerHeight,RED);
-        drawPlayerAtPos(player2X,player2Y,playerWidth,playerHeight,RED);
+        drawPlayerAtPos(player1X,player1Y,playerWidth,playerHeight,playerColor);
+        drawPlayerAtPos(player2X,player2Y,playerWidth,playerHeight,playerColor);
 
+        drawBallAtPos(ballX,ballY,ballRadius,ballColor);
 
 
         EndDrawing();
