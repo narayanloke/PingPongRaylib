@@ -8,14 +8,16 @@ int player1Y=0;
 int player2X=0;
 int player2Y=0;
 
+int player2Point=0;
+int player1Point=0;
 
 int ballX=0;
 int ballY=0;
 int ballRadius=20;
 Color ballColor=GREEN;
 
-int ballXincr=1;
-int ballYincr=1;
+int ballXincr=2;
+int ballYincr=2;
 
 
 int playerHeight=100;
@@ -77,6 +79,13 @@ int main(void)
             }
         }
 
+        if(IsKeyDown(90))      //Key Code for z
+        {
+            player1Point=0;
+            player2Point=0;
+            ballXincr=2;
+            ballYincr=2;
+        }
 
 
 
@@ -92,30 +101,69 @@ int main(void)
 
         if(CheckCollisionCircleRec((Vector2){ballX,ballY},ballRadius,(Rectangle){player1X,player1Y,playerWidth,playerHeight}))
         {
-            ballXincr=-1;
+            ballXincr=-2;
 
         }
 
         if(CheckCollisionCircleRec((Vector2){ballX,ballY},ballRadius,(Rectangle){player2X,player2Y,playerWidth,playerHeight}))
         {
-            ballXincr=1;
+            ballXincr=2;
 
         }
 
+        if(CheckCollisionCircleLine((Vector2){ballX,ballY},ballRadius,(Vector2){0,0},(Vector2){0,screenHeight}))
+        {
+            player2Point+=1;
+            ballX=screenWidth/2;
+            ballY=screenHeight/2;
+        }
+
+
+        if(CheckCollisionCircleLine((Vector2){ballX,ballY},ballRadius,(Vector2){screenWidth,0},(Vector2){screenWidth,screenHeight}))
+        {
+            player1Point+=1;
+            ballX=screenWidth/2;
+            ballY=screenHeight/2;
+        }
 
 
         if(ballY>=screenHeight)
         {
-            ballYincr=-1;
+            ballYincr=-2;
         }
         if(ballY<=0)
         {
-            ballYincr=1;
+            ballYincr=2;
         }
 
 
         ballX=ballX+ballXincr;
         ballY=ballY+ballYincr;
+
+        DrawText(TextFormat("%i", player1Point),100,50,20,RED);
+        DrawText(TextFormat("%i", player2Point),(screenWidth-100),50,20,RED);
+
+
+        if(player1Point==10)
+        {
+            ballX=screenWidth/2;
+            ballY=screenHeight/2;
+            ballXincr=0;
+            ballYincr=0;
+            DrawText(TextFormat("Player 1 Won. Press Z to restart."),(screenWidth/2)-200,(screenHeight/2)-100,30,RED);
+        }
+
+
+        if(player2Point==10)
+        {
+            ballX=screenWidth/2;
+            ballY=screenHeight/2;
+            ballXincr=0;
+            ballYincr=0;
+            DrawText(TextFormat("Player 2 Won. Press Z to restart."),(screenWidth/2)-200,(screenHeight/2)-100,30,RED);
+        }
+
+
 
         EndDrawing();
     }
