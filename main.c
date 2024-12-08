@@ -11,11 +11,14 @@ int player2Y=0;
 
 int ballX=0;
 int ballY=0;
-int ballRadius=30;
+int ballRadius=20;
 Color ballColor=GREEN;
 
+int ballXincr=1;
+int ballYincr=1;
 
-int playerHeight=200;
+
+int playerHeight=100;
 int playerWidth=20;
 Color playerColor=RED;
 
@@ -25,14 +28,14 @@ int main(void)
     const int screenHeight = 450;
 
     player2X=10;
-    player1X=screenWidth-20;
+    player1X=screenWidth-playerWidth;
 
-    player2Y=(screenHeight/2)-playerHeight;
-    player1Y=(screenHeight/2)-playerHeight;
+    player2Y=(screenHeight/2)-(playerHeight/2);
+    player1Y=(screenHeight/2)-(playerHeight/2);
 
 
-    ballX=(screenWidth/2)-ballRadius;
-    ballY=(screenHeight/2)-ballRadius;
+    ballX=(screenWidth/2);
+    ballY=(screenHeight/2);
 
 
     InitWindow(screenWidth, screenHeight, "PingPong");
@@ -45,7 +48,7 @@ int main(void)
         {
             if(player2Y>0)
             {
-                player2Y=player2Y-1;
+                player2Y=player2Y-2;
             }
         }
 
@@ -53,7 +56,7 @@ int main(void)
         {
             if(player2Y<(screenHeight-playerHeight))
             {
-                player2Y=player2Y+1;
+                player2Y=player2Y+2;
             }
         }
 
@@ -62,7 +65,7 @@ int main(void)
         {
             if(player1Y>0)
             {
-                player1Y=player1Y-1;
+                player1Y=player1Y-2;
             }
         }
 
@@ -70,7 +73,7 @@ int main(void)
         {
             if(player1Y<(screenHeight-playerHeight))
             {
-                player1Y=player1Y+1;
+                player1Y=player1Y+2;
             }
         }
 
@@ -79,11 +82,40 @@ int main(void)
 
         BeginDrawing();
         ClearBackground(BLACK);
+        DrawLine(screenWidth/2,0,screenWidth/2,screenHeight,YELLOW);
         drawPlayerAtPos(player1X,player1Y,playerWidth,playerHeight,playerColor);
         drawPlayerAtPos(player2X,player2Y,playerWidth,playerHeight,playerColor);
 
         drawBallAtPos(ballX,ballY,ballRadius,ballColor);
 
+
+
+        if(CheckCollisionCircleRec((Vector2){ballX,ballY},ballRadius,(Rectangle){player1X,player1Y,playerWidth,playerHeight}))
+        {
+            ballXincr=-1;
+
+        }
+
+        if(CheckCollisionCircleRec((Vector2){ballX,ballY},ballRadius,(Rectangle){player2X,player2Y,playerWidth,playerHeight}))
+        {
+            ballXincr=1;
+
+        }
+
+
+
+        if(ballY>=screenHeight)
+        {
+            ballYincr=-1;
+        }
+        if(ballY<=0)
+        {
+            ballYincr=1;
+        }
+
+
+        ballX=ballX+ballXincr;
+        ballY=ballY+ballYincr;
 
         EndDrawing();
     }

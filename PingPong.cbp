@@ -13,7 +13,14 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="/home/lokesaheb/raylib/src" />
+					<Add directory="/home/lokesaheb/raylib/src/external" />
 				</Compiler>
+				<Linker>
+					<Add library="/home/lokesaheb/raylib/src/libraylib.a" />
+					<Add library="m" />
+					<Add directory="/home/lokesaheb/raylib/src/" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/PingPong" prefix_auto="1" extension_auto="1" />
@@ -31,6 +38,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="ball.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ball.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="player.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="player.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
